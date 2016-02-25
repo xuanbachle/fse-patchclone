@@ -21,6 +21,7 @@ After running the code, it will generate the folders:
         * bftContext: context before the changed line
         
 For example, if your project folder is: rootFolder/Acstylos_wpi-suite/
+
 then all the generated folders above will be in this folder: rootFolder/Acstylos_wpi-suite/modifiedFiles/2
 
         
