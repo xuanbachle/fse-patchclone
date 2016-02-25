@@ -83,10 +83,10 @@ object Main {
                 if(remLineString != ""){
                   Utilities.writeFile2Folder(remLineString, "removedLine.java", changedLineFolder)
                   writeStubCode(changedLineFolder, remLineString, "removedLineWithStub.java")
-                } else if(addLineString != ""){
-                  Utilities.writeFile2Folder(addLineString, "addedLine.java", changedLineFolder)
-                  writeStubCode(changedLineFolder, addLineString, "addedLineWithStub.java")
-                }
+                } //else if(addLineString != ""){
+                  //Utilities.writeFile2Folder(addLineString, "addedLine.java", changedLineFolder)
+                  //writeStubCode(changedLineFolder, addLineString, "addedLineWithStub.java")
+                //}
 
                 val oldFile = old.listFiles()(0)// the is only one file, so the index is 0
                 val (befCtx, aftCtx) = Utilities.getContext(oldFile.getAbsolutePath, lineOfInterest-1)
@@ -105,7 +105,7 @@ object Main {
       * Input is the root folder
       * From input folder, we scan (iterate) through each project
       */
-    val configFile = "/home/xuanbach/workspace/fse-patchclone/resources/configuration1.properties"
+    val configFile = "/home/xuanbach/workspace/fse-patchclone/resources/configuration.properties"
     if(new File(configFile).exists())
       ConfigurationProperties.load(configFile)
     else
