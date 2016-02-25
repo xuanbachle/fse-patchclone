@@ -8,6 +8,7 @@ You only need to change some parameters (explained in comments in the config fil
 provided) to make the project run on your local machine
 
 ===================Investigate data generated after running the jar===========
+
 After running the code, it will generate the folders: 
         * changedLine: indicates the changed Line
         * changedLineStub: the changedLine surrounded by stub code
