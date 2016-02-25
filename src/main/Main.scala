@@ -3,7 +3,7 @@ package main
 import java.io.File
 
 import config.ConfigurationProperties
-import parsers.{LineAdded, LineRemoved, GitDiffParser, JavaParser}
+import parsers._
 import utilities.{FindContextVisitor, Utilities}
 /**
   * Created by xuanbach on 2/15/16.
@@ -25,6 +25,13 @@ object Main {
     str.append(line2Write+"\n")
     str.append(stubAft)
     myLib.Lib.writeText2File(str.toString(), new File(changedLineWithStubFolder + File.separator + fileName))
+  }
+
+  private def isComment(line: LineChange): Boolean = {
+    if (line.line.trim().startsWith("/*") || line.line.trim().startsWith("*") || line.line.trim().startsWith("//")) {
+      return true
+    } else
+      return false
   }
 
   def processInput(rootFolder: String): Unit ={
@@ -54,10 +61,10 @@ object Main {
                 val compUnit = parser.getCompilationUnit(new File(aDiff.oldFile).getName)
                 // A git diff that is not for a test case, it should only be the change we need to look at
                 // And in this diff, there is only one change chunk. Thus, it is aDiff.chunks(0)
-                val removedLine = aDiff.chunks(0).changeLines.filter(line => line.isInstanceOf[LineRemoved])
+                val removedLine = aDiff.chunks(0).changeLines.filter(line => line.isInstanceOf[LineRemoved] && !isComment(line))
                 /**
-                  * For now we only consider removed line.
-                  * What if there is no removed line, instead, there is only one added line?
+                  * Basically, we consider removed line.
+                  * If there is no removed line, instead, there is only one added line then we take the added line
                   */
                 var lineOfInterest = 0;
                 var remLineString = "";
@@ -66,7 +73,8 @@ object Main {
                   remLineString = removedLine(0).asInstanceOf[LineRemoved].line
                   lineOfInterest = aDiff.chunks(0).rangeInformation.oldOffset
                 }else{// removedLine.length == 0
-                  addLineString = aDiff.chunks(0).changeLines(0).line // only one line, and it is the added line
+                  val addLine = aDiff.chunks(0).changeLines.filter(line => line.isInstanceOf[LineAdded] && !isComment(line))
+                  addLineString = addLine(0).line // only one line, and it is the added line
                   lineOfInterest = aDiff.chunks(0).rangeInformation.newOffset
                 }
                 //val contextVisitor = new FindContextVisitor(lineOfInterest, compUnit)
@@ -97,7 +105,7 @@ object Main {
       * Input is the root folder
       * From input folder, we scan (iterate) through each project
       */
-    val configFile = "/home/xuanbach/workspace/fse-patchclone/resources/configuration.properties"
+    val configFile = "/home/xuanbach/workspace/fse-patchclone/resources/configuration1.properties"
     if(new File(configFile).exists())
       ConfigurationProperties.load(configFile)
     else
