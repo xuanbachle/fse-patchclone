@@ -11,10 +11,15 @@ provided) to make the project run on your local machine
 ===================Investigate data generated after running the jar===========
 
 After running the code, it will generate the folders: 
+
         * changedLine: indicates the changed Line
+        
         * changedLineStub: the changedLine surrounded by stub code
+        
         * aftContext: context after the changed line
+        
         * bftContext: context before the changed line
+        
 For example, if your project folder is: rootFolder/Acstylos_wpi-suite/
 then all the generated folders above will be in this folder: rootFolder/Acstylos_wpi-suite/modifiedFiles/2
 
