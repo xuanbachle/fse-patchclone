@@ -22,7 +22,7 @@ After running the code, it will generate the folders:
         
 For example, if your project folder is: rootFolder/Acstylos_wpi-suite/
 
-then all the generated folders above will be in this folder: rootFolder/Acstylos_wpi-suite/modifiedFiles/2
+then all the generated folders above will be in this folder: rootFolder/Acstylos_wpi-suite/modifiedFiles/*countFolder*, where the countFolder can be 2,4,6,8, etc
 
         
 
