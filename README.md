@@ -24,5 +24,7 @@ For example, if your project folder is: rootFolder/Acstylos_wpi-suite/
 
 then all the generated folders above will be in this folder: rootFolder/Acstylos_wpi-suite/modifiedFiles/*countFolder*, where the countFolder can be 2,4,6,8, etc
 
+Note that the changedLine and changedLineStub folder will only be generated if there is a line change in the diff that is removed (line start by "-"). 
+
         
 
